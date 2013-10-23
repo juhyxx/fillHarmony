@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="harmony" lang="en">
+	<head>
+		<title>fillHarmony</title>
+		<meta charset="UTF-8">
+		<link href="resources/css/style.css" rel="stylesheet" type="text/css" charset="utf-8">
+		<script src="lib/jquery-2.0.3.min.js"></script>
+		<script src="lib/angular-1.0.8/angular.js"></script>
+		<script src="resources/javascript/script.js"></script>
+	</head>
+	<body class="theme-glossy" ng-controller="fillHarmony">
+		<div class="switch" title="Change theme"><div class="rider"></div></div>
+		<div id="circle" ng-controller="circle">
+
+			
+			<ul id="text" >
+				<li ng-repeat="text in texts">
+					<div class="note">
+						<span ng-bind-html-unsafe="text.bes"></span>
+						<span  ng-bind-html-unsafe="text.sharp"></span>
+					</div>
+				</li>
+			</ul>
+
+			<ul id="labels" >
+				<li ng-repeat="label in labels">
+					<span>{{label.name}}</span>
+				</li>
+			</ul>
+
+			<ul id="type-labels" >
+				<li ng-repeat="label in labels">
+					<span ng-bind-html-unsafe="label.chord"></span>
+				</li>
+			</ul>
+
+			<div id="labels-bg"></div>
+			<div id="container">
+				<div id="center">
+					<div id="center-inside">
+						<div id="center-small"></div>
+					</div>
+				</div>
+				<ul id="background" >
+					<li ng-repeat="label in labels">
+						<div ng-class="label.name.toLowerCase().replace(' ', '')">
+							<span></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="line" ng-controller="line">
+			<ul id="bg" >
+				<li ng-repeat="hlabel in hlabels" title="{{hlabel.name}}" class="{{hlabel.name.toLowerCase().replace(' ', '')}}">
+					<div ng-bind-html-unsafe="hlabel.chord"></div>
+				</li>
+			</ul>
+
+			<ul id="line-labels">
+				<li ng-repeat="text in labels">
+					<div class="note">
+						<span ng-bind-html-unsafe="text.bes"></span>
+						<span  ng-bind-html-unsafe="text.sharp"></span>
+					</div>
+					{{ update($last) }}
+				</li>
+			</ul>
+
+		</div>
+		<div id="selector" >
+			<div id="slider"><div class="rider"></div></div>
+
+			<ul ng-controller="selector">
+				<li ng-repeat="scale in scales">
+					<input ng-model="selected" ng-click="onSelect(scale)" id="{{scale.id}}" type="radio" name="select" checked="{{scale.selected}}" value="{{scale.id}}">
+					<label for="{{scale.id}}">{{scale.name}}</label>
+				</li>
+			</ul>
+
+		</div>
+		<div class="logo">fillHarmony</div>
+	</body>
+</html>

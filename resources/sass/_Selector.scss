@@ -1,0 +1,76 @@
+#selector {
+    position: absolute;
+    right: 1em;
+    width: 110px;
+    top: 60px;
+    font-size: 10px;
+    ul {
+        position: absolute;
+        left: -20px;
+        li {
+            position: relative;
+            label {
+                cursor: pointer;
+                opacity: 0.5;
+                .theme-glossy & {
+                    color: white;
+                }
+                &:hover {
+                    opacity: 0.8;
+                }
+                padding-left: 30px;
+            }
+            input[type="radio"] {
+                visibility: hidden;
+            }
+            input[type="radio"]:checked + label {
+                &:before {
+                    .theme-glossy & {
+                        @include background(linear-gradient(rgba(white, 0) 0%, white 50%, rgba(white, 0) 100%));
+                    }
+                     .theme-simple & {
+                        @include background(linear-gradient(
+                            rgba(black, 0) 20%,
+                            rgba(black, 0.5) 20%, 
+                            rgba(black, 0.5) 40%, 
+                            black 50%, 
+                            rgba(black, 0.5) 60%,
+                            rgba(black, 0.5) 80%,
+                            rgba(black, 0) 80%)
+                        );
+                     }
+                    content: "";
+                    opacity: 0.4;
+                    position: absolute;
+                    width: 18px;
+                    height: 18px;
+                    top: 4px;
+                    left: 21px;
+                }
+                opacity: 1;
+            }
+        }
+    }
+    #slider {
+        .theme-glossy & {
+            @include background(linear-gradient(darken(green, 10%) 0%, green 20%, darken(green, 10%) 80%));
+            &:hover {
+                @include background(linear-gradient(darken(green, 10%) 0%, lighten(green, 10%) 20%, darken(green, 10%) 80%));
+            }
+            @include box-shadow(0 -2px 3px 2px rgba(black, 0.2), 0 2px 3px 2px rgba(lighten(white, 20%), 0.2), 0 0px 5px black inset);
+            border: 1px solid transparent;
+        }
+        .theme-simple & {
+            background: lightgray;
+            border: 1px solid gray;
+            &:hover {
+                background: lighten(green, 10%);
+            }
+        }
+        border-radius: 18px;
+        position: absolute;
+        width: 18px;
+        height: 10 + 7 * 18px;
+        background-color: black;
+    }
+}
