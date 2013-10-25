@@ -26,57 +26,6 @@
 			id: 'locrian',
 			name: 'Locrian'
 		}],
-		noteNames = [{
-			bes: 'C',
-			sharp: 'C'
-		}, {
-			bes: 'D♭',
-			sharp: 'C♯'
-		}, {
-			bes: 'D',
-			sharp: 'D'
-		}, {
-			bes: 'E♭',
-			sharp: 'D♯'
-		}, {
-			bes: 'E',
-			sharp: 'E'
-		}, {
-			bes: 'F',
-			sharp: 'F'
-		}, {
-			bes: 'G♭',
-			sharp: 'F♯'
-		}, {
-			bes: 'G',
-			sharp: 'G'
-		}, {
-			bes: 'A♭',
-			sharp: 'G♯'
-		}, {
-			bes: 'A',
-			sharp: 'A'
-		}, {
-			bes: 'B♭',
-			sharp: 'A♯'
-		}, {
-			bes: 'B',
-			sharp: 'B'
-		}],
-		circleNotes = [
-			noteNames[0], //C
-			noteNames[7], //G
-			noteNames[2], //D
-			noteNames[9], //A
-			noteNames[4], //E
-			noteNames[11], //B
-			noteNames[6], //F#
-			noteNames[1], //C#
-			noteNames[8], //G#
-			noteNames[3], //D#
-			noteNames[10], //A#
-			noteNames[5], //F
-		],
 		harmonicFn = [{
 			name: 'Tonic'
 			//chord: 'M7'
@@ -226,44 +175,6 @@
 		}
 	}
 
-	harmony = angular.module('harmony', []);
-	harmony.controller('fillHarmony', function($scope) {
-		$scope.$on('select', function(e, scale) {
-			$scope.$broadcast('selected', scale);
-		})
-	});
-	harmony.controller('circle', function($scope) {
-		$scope.texts = angular.copy(circleNotes).reverse();
-		$scope.labels = harmonicMapping.major;
-		$scope.$on('selected', function(e, scale) {
-			$scope.labels = harmonicMapping[scale];
-			selectedScale = scale;
-		})
-
-	});
-	harmony.controller('line', function($scope) {
-		$scope.labels = circleNotes;
-		$scope.hlabels = harmonicFn;
-
-		$scope.update = function(isLast) {
-			if (isLast) {
-				updateLine(0);
-			}
-		};
-	});
-	harmony.controller('selector', function($scope) {
-		$scope.scales = scales;
-		$scope.scales[0].selected = true;
-		$scope.selected = scales[0].id;
-		$scope.onSelect = function(item) {
-			$scope.$emit('select', this.selected);
-		};
-		$scope.selectNext = function() {
-
-		}
-		$scope.selectPrev = function() {}
-	});
-
 	$(document).ready(function() {
 		var text = $('#circle ul#text');
 
@@ -353,30 +264,3 @@
 				$('body').toggleClass('theme-glossy').toggleClass('theme-simple');
 			});
 	});
-
-	jQuery.fn.rotate = function(degrees) {
-		$(this).css({
-			'-webkit-transform': 'rotate(' + degrees + 'deg)',
-			'-moz-transform': 'rotate(' + degrees + 'deg)',
-			'-ms-transform': 'rotate(' + degrees + 'deg)',
-			'transform': 'rotate(' + degrees + 'deg)'
-		});
-	};
-
-	jQuery.fn.getCenterPoint = function() {
-		var offset = $(this).offset();
-
-		return {
-			x: offset.left + $(this).width() / 2,
-			y: offset.top + $(this).height() / 2
-		};
-	};
-
-	jQuery.getAngle = function(center, point) {
-		var x = center.x - point.x,
-			y = center.y - point.y,
-			angle = Math.round(Math.atan2(y, x) * 180 / Math.PI + 180);
-
-		angle = (angle + 90) % 360;
-		return angle;
-	};
