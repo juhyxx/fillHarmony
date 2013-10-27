@@ -9,6 +9,39 @@ harmony.controller('fillHarmony', function($scope) {
 	};
 });
 
+harmony.controller('selector', function($scope, scales) {
+	$scope.scales = scales;
+	$scope.selectedScale = $scope.scales[0];
+	$scope.scales[0].selected = true;
+	$scope.selected = $scope.selectedScale.id;
+	$scope.$emit('select', $scope.selected);
+
+	$scope.onSelect = function(item) {
+		$scope.selected = item.id;
+		$scope.selectedScale = item;
+		for (var i = 0; i < $scope.scales.length; i++) {
+			$scope.scales[i].selected = $scope.scales[i] === item;
+		}
+		$scope.$emit('select', item.id);
+	};
+
+	$scope.selectNext = function() {
+		var index = $scope.scales.indexOf($scope.selectedScale);
+
+		index = (index + 1) % $scope.scales.length;
+		console.log(index);
+		$scope.onSelect($scope.scales[index]);
+		$scope.$apply();
+	}
+	$scope.selectPrev = function() {
+		var index = $scope.scales.indexOf($scope.selectedScale)  - 1;
+
+		index = index < 0 ? $scope.scales.length - 1 : index;
+		$scope.onSelect($scope.scales[index]);
+		$scope.$apply();
+	}
+});
+
 harmony.controller('circle', function($scope, circleNotes, harmonicMapping) {
 	$scope.texts = angular.copy(circleNotes).reverse();
 	$scope.labels = harmonicMapping.major;
@@ -21,7 +54,6 @@ harmony.controller('line', function($scope, circleNotes, harmonicMapping, harmon
 	$scope.labels = circleNotes;
 	$scope.hlabels = harmonicFn;
 	$scope.lmaping = [];
-	$scope.selectedScale = 'major';
 
 	for (var scaleName in harmonicMapping) {
 		scale = harmonicMapping[scaleName];
@@ -55,17 +87,4 @@ harmony.controller('line', function($scope, circleNotes, harmonicMapping, harmon
 			}
 		}
 	}
-});
-
-harmony.controller('selector', function($scope, scales) {
-	$scope.scales = scales;
-	$scope.scales[0].selected = true;
-	$scope.selected = scales[0].id;
-	$scope.onSelect = function(item) {
-		$scope.$emit('select', this.selected);
-	};
-	$scope.selectNext = function() {
-
-	}
-	$scope.selectPrev = function() {}
 });

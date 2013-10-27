@@ -68,15 +68,13 @@
 
 		$(document)
 			.keydown(function(e) {
-
-				//38
-				//40
-
 				if (!isDND) {
 					if (e.which === 37 || e.which === 39) {
 						rotate(e.which == 37 ? 'up' : 'down', e);
 					} else if (e.which === 38 || e.which === 40) {
-						angular.element('[ng-controller=selector]').scope()[e.which == 37 ? 'selectPrev' : 'selectNext']();
+						angular.element('[ng-controller=selector]').scope()[e.which == 38 ? 'selectPrev' : 'selectNext']();
+						e.stopPropagation();
+			e.preventDefault();
 					}
 				}
 			})

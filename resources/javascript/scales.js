@@ -1,8 +1,7 @@
 harmony.factory('scales', function() {
 	return [{
 		id: 'major',
-		name: 'Major (Ionian)',
-		selected: true
+		name: 'Major (Ionian)'
 	}, {
 		id: 'minor',
 		name: 'Minor (Aeolian)'

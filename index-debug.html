@@ -73,17 +73,19 @@
 			</ul>
 
 		</div>
+
+
 		<div id="selector" >
 			<div id="slider"><div class="rider"></div></div>
 
 			<ul ng-controller="selector">
 				<li ng-repeat="scale in scales">
-					<input ng-model="selected" ng-click="onSelect(scale)" id="{{scale.id}}" type="radio" name="select" checked="{{scale.selected}}" value="{{scale.id}}">
+					<input ng-model="selected" ng-click="onSelect(scale)" id="{{scale.id}}" type="radio" name="select" value="{{scale.id}}">
 					<label for="{{scale.id}}">{{scale.name}}</label>
 				</li>
 			</ul>
-
 		</div>
+
 		<div class="logo">fillHarmony</div>
 	</body>
 </html>
