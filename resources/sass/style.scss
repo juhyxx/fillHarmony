@@ -26,6 +26,7 @@ body {
     background-color: #EFEFEF;
     @include transition(background-color 1s);
     @include user-select(none);
+     background-color:lighten(black, 80%);
     &.theme-glossy {
         background-color: lighten(black, 20%);
     }
